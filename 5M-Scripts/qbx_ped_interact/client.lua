@@ -33,6 +33,14 @@ local function spawnPed()
                                 TriggerServerEvent('qbx_ped_interact:giveItem')
                             end,
                         },
+                        {
+                            title = Config.Menu.ticketLabel,
+                            description = 'Receive a street fight ticket.',
+                            icon = 'fa-solid fa-ticket',
+                            onSelect = function()
+                                TriggerServerEvent('qbx_ped_interact:giveTicket')
+                            end,
+                        },
                     },
                 })
 

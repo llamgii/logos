@@ -17,8 +17,21 @@ Config.Reward = {
     count = 1,
 }
 
+Config.Ticket = {
+    item = 'streetfight_ticket',
+    count = 1,
+}
+
+Config.PoliceJobName = 'police'
+
+Config.RefuseNotification = {
+    description = "We're sorry, we are not dealing with Police officers.",
+    type = 'error',
+}
+
 Config.Menu = {
     title = 'Corner Store Clerk',
     description = 'Need something? I can give you a bottle of water.',
     buttonLabel = 'Get Water',
+    ticketLabel = 'Get Streetfight Ticket',
 }

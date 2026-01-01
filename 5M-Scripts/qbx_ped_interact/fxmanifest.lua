@@ -22,3 +22,4 @@ server_scripts {
 dependency 'ox_lib'
 dependency 'ox_target'
 dependency 'ox_inventory'
+dependency 'qbx_core'
