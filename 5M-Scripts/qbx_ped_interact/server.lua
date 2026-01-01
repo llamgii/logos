@@ -41,5 +41,11 @@ RegisterNetEvent('qbx_ped_interact:giveTicket', function()
         return
     end
 
+    local existing = exports.ox_inventory:GetItem(src, ticket.item, nil, false)
+    if existing and existing.count and existing.count > 0 then
+        TriggerClientEvent('ox_lib:notify', src, Config.AlreadyTicketNotification)
+        return
+    end
+
     exports.ox_inventory:AddItem(src, ticket.item, ticket.count or 1)
 end)

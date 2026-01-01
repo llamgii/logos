@@ -1,21 +1,7 @@
-local pedEntity
+local pedEntities = {}
 
-local function spawnPed()
-    local model = joaat(Config.Ped.model)
-    lib.requestModel(model)
-
-    local coords = Config.Ped.coords
-    pedEntity = CreatePed(0, model, coords.x, coords.y, coords.z - 1.0, coords.w, false, false)
-
-    SetEntityInvincible(pedEntity, true)
-    SetBlockingOfNonTemporaryEvents(pedEntity, true)
-    FreezeEntityPosition(pedEntity, true)
-
-    if Config.Ped.scenario then
-        TaskStartScenarioInPlace(pedEntity, Config.Ped.scenario, 0, true)
-    end
-
-    exports.ox_target:addLocalEntity(pedEntity, {
+local function registerPedTarget(entity)
+    exports.ox_target:addLocalEntity(entity, {
         {
             label = Config.Target.label,
             icon = Config.Target.icon,
@@ -50,8 +36,29 @@ local function spawnPed()
     })
 end
 
+local function spawnPed(pedConfig)
+    local model = joaat(pedConfig.model)
+    lib.requestModel(model)
+
+    local coords = pedConfig.coords
+    local pedEntity = CreatePed(0, model, coords.x, coords.y, coords.z - 1.0, coords.w, false, false)
+
+    SetEntityInvincible(pedEntity, true)
+    SetBlockingOfNonTemporaryEvents(pedEntity, true)
+    FreezeEntityPosition(pedEntity, true)
+
+    if pedConfig.scenario then
+        TaskStartScenarioInPlace(pedEntity, pedConfig.scenario, 0, true)
+    end
+
+    registerPedTarget(pedEntity)
+    table.insert(pedEntities, pedEntity)
+end
+
 CreateThread(function()
-    spawnPed()
+    for _, pedConfig in ipairs(Config.Peds) do
+        spawnPed(pedConfig)
+    end
 end)
 
 AddEventHandler('onResourceStop', function(resource)
@@ -59,7 +66,9 @@ AddEventHandler('onResourceStop', function(resource)
         return
     end
 
-    if pedEntity and DoesEntityExist(pedEntity) then
-        DeleteEntity(pedEntity)
+    for _, pedEntity in ipairs(pedEntities) do
+        if DoesEntityExist(pedEntity) then
+            DeleteEntity(pedEntity)
+        end
     end
 end)
