@@ -16,6 +16,10 @@ Config.Peds = {
         coords = vec4(-273.69, -1919.68, 29.95, 317.12),
         scenario = 'WORLD_HUMAN_STAND_IMPATIENT',
     },
+Config.Ped = {
+    model = 'a_m_y_business_01',
+    coords = vec4(-1827.97, -1246.83, 13.45, 321.11),
+    scenario = 'WORLD_HUMAN_STAND_IMPATIENT',
 }
 
 Config.Target = {
