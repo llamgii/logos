@@ -47,5 +47,19 @@ RegisterNetEvent('qbx_ped_interact:giveTicket', function()
         return
     end
 
+    local currencyItem = Config.TicketCurrencyItem
+    local price = ticket.price or 0
+    if price > 0 then
+        local funds = exports.ox_inventory:GetItem(src, currencyItem, nil, false)
+        local balance = funds and funds.count or 0
+        if balance < price then
+            TriggerClientEvent('ox_lib:notify', src, Config.InsufficientFundsNotification)
+            return
+        end
+
+        exports.ox_inventory:RemoveItem(src, currencyItem, price)
+    end
+
     exports.ox_inventory:AddItem(src, ticket.item, ticket.count or 1)
+    TriggerClientEvent('ox_lib:notify', src, Config.TicketAnnouncement)
 end)

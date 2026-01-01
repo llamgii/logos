@@ -16,10 +16,6 @@ Config.Peds = {
         coords = vec4(-273.69, -1919.68, 29.95, 317.12),
         scenario = 'WORLD_HUMAN_STAND_IMPATIENT',
     },
-Config.Ped = {
-    model = 'a_m_y_business_01',
-    coords = vec4(-1827.97, -1246.83, 13.45, 321.11),
-    scenario = 'WORLD_HUMAN_STAND_IMPATIENT',
 }
 
 Config.Target = {
@@ -36,7 +32,10 @@ Config.Reward = {
 Config.Ticket = {
     item = 'streetfight_ticket',
     count = 1,
+    price = 1000,
 }
+
+Config.TicketCurrencyItem = 'money'
 
 Config.PoliceJobName = 'police'
 
@@ -48,6 +47,16 @@ Config.RefuseNotification = {
 Config.AlreadyTicketNotification = {
     description = 'You already took the ticket.',
     type = 'error',
+}
+
+Config.InsufficientFundsNotification = {
+    description = 'You do not have enough money for the ticket.',
+    type = 'error',
+}
+
+Config.TicketAnnouncement = {
+    description = 'Ticket purchased. Go to Tequila-la Club with your ticket.',
+    type = 'inform',
 }
 
 Config.Menu = {
